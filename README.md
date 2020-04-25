@@ -1,3 +1,55 @@
+# Getting started
+
+Install Node.js (LTS) which comes with npm.
+
+This project uses yarn instead of npm, so install yarn:
+
+`npm i -g yarn`
+
+Check you have yarn installed with the command:
+
+`yarn -v`
+
+Which should log the version of yarn you have to the console.
+
+If yarn is not found, it may need to be added as an environmental variable.
+
+Open a terminal, there is one embedded in VSCode.
+
+It is recommended to use a MacOS, Linux such as Ubuntu, or Windows Subsystem for Linux on Windows (install ubuntu app).
+
+Finally you are ready to clone this repo:
+
+`git clone <link-to-repo>`
+
+Then change directory in your terminal to the cloned folder:
+
+`cd <repo-name>`
+
+Now you can install the node modules with:
+
+`yarn`
+
+Then you can run the project with:
+
+`yarn dev`
+
+It should open a browser window on `localhost:3000` which shows our app.
+
+You can edit the code and it should automatically update as you do so.
+
+When adding files to /public you may need to then run `yarn build` and then `yarn dev` again.
+
+Pages are in /pages, index.js is the home page while signup.js is the /signup page.
+
+These are react components, which also have styled-components. You can research JSX and styled-components if you don't know what they are, but your HTML and CSS skills should help you here.
+
+# Todo
+
+Translate figma designs into code
+
+- signup page
+
 # Example app with styled-components
 
 This example features how you use a different styling solution than [styled-jsx](https://github.com/zeit/styled-jsx) that also supports universal styles. That means we can serve the required styles for the first render within the HTML and then load the rest in the client. In this case we are using [styled-components](https://github.com/styled-components/styled-components).
