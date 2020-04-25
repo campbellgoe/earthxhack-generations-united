@@ -1,0 +1,14 @@
+{
+  "colors": {
+    "background": {
+      "primary": "#101010",
+      "secondary": "#312d31"
+    },
+    "button": {
+      "primary": "#D9352F"
+    },
+    "lines": {
+      "primary": "#403c3f"
+    }
+  }
+}
