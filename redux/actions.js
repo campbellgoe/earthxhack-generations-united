@@ -46,4 +46,4 @@ export const rotateCustomers = rotateDirection => ({ type: ROTATE_CUSTOMERS, rot
 
 export const REVIEW_CUSTOMER = "REVIEW_CUSTOMER";
 
-export const REVIEW_CUSTOMER = review => ({ type: REVIEW_CUSTOMER, review });
+export const reviewCustomer = review => ({ type: REVIEW_CUSTOMER, review });
