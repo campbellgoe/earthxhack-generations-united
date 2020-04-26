@@ -41,35 +41,13 @@ const initialState = {
   //use this with getMiddle3 to get the middle 3 cards from the details array
   middleCardIndex: 0,
 };
-
-//for the carousel we want to see 3 customer details, which we can rotate through
-function getMiddle3(arr, index){
-  index = index % arr.length;
-  if(arr[index]){
-    if(arr[index-1] && arr[index+1]){
-      return [arr[index-1], arr[index], arr[index+1]];
-    }
-    if(!arr[index-1]){
-      return [arr[arr.length-1], arr[index], arr[index+1]];
-    }
-    if(!arr[index+1]){
-      return [arr[index-1], arr[index], arr[0]]
-    }
-  } else {
-    throw new Error("Unknown index "+index+" for array of length "+arr.length);
-  }
-}
 export default function(state = initialState, { type, rotateDirection }) {
   switch (type) {
     case ROTATE_CUSTOMERS: {
       // this is a carousel which can rotate left or right. +1 is right, -1 is left.
-      // TODO: this reducer
-      // if(rotateDirection === 1){
-      //   state.details
-      // }
       return {
         ...state,
-        
+        middleCardIndex: (state.middleCardIndex + rotateDirection) % state.details.length
       }
     }
     default: {
