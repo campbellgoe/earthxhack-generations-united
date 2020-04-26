@@ -2,7 +2,7 @@ import styled from 'styled-components'
 const CustomerCard = styled(({ className = '', details: { name, age, gender, location, languages }, time = ''}) => {
   return (
     <div className={'CustomerCard ' + className}>
-      <h1><span>{name}</span>{time && <span>{time}</span>}</h1>
+      <h1><span>{name}</span>{time && <span className="call-time">{time}</span>}</h1>
       <section>
         <div>
           <div>Age</div>

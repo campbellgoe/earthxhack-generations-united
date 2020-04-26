@@ -78,7 +78,7 @@ const LiveCallPage = styled(({ className = '' }) => {
 })`
 .StateFarmCard {
   padding: 16px;
-  height: 100vh;
+  min-height: 100vh;
 }
 h1 {
   font-weight: 600;

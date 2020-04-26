@@ -1,90 +1,120 @@
-import styled from 'styled-components'
+import withRedux from '../../redux/withRedux'
+import { selectLiveCustomer } from '../../redux/selectors'
+import { useDispatch, useSelector } from 'react-redux'
 import Layout from '../../components/Layout'
 import StateFarmCard from '../../components/StateFarmCard'
-import Img from '../../components/Img'
+import Link from 'next/link'
+import CustomerCard from '../../components/CustomerCard'
+import { checkboxStyles } from '../../components/Checkboxes'
+import styled from 'styled-components'
 
-const Medal = '/images/medal.png'
-const Star = '/images/star.png'
 
-const Review = styled(({ className = '' }) => (
-  <Layout className={className} title={'Generations United - Call Live'} bottomBar={false}>
-    <StateFarmCard className="StateFarmCard">
-    <Img src={Medal} alt="Medal" className="Medal"/>
-    <h1>Thank you for Helping.</h1>
-    <br/>
-    <br/>
-    <h4>You earned a badge.</h4>
-    <br/>
-    <br/>
-    <h4>How was your expirience?</h4>
-    <br/>
-    <div class="row">
-      <div class="column">
-        <Img src={Star} alt="Star" className="Star"/>
-      </div>
-       <div class="column">
-      <Img src={Star} alt="Star" className="Star"/>
-      </div>
-      <div class="column">
-        <Img src={Star} alt="Star" className="Star"/>
-      </div>
-      <div class="column">
-        <Img src={Star} alt="Star" className="Star"/>
-      </div>
-      <div class="column">
-        <Img src={Star} alt="Star" className="Star"/>
-      </div>            
+const CheckboxSection = styled(({ className = '', title, items = [] }) => {
+  return <section className={className + ' CheckboxSection'}>
+    <h1>{title}</h1>
+    <div className="checkbox-section">
+      {items.map(({text, checked = false}, index) => {
+        const id = text.split(' ') + index;
+        return (
+          <div>
+            <label htmlFor={id}>{text}</label>
+            <input type="checkbox" checked={checked} id={id} />
+          </div>
+        )
+      })}
     </div>
-    </StateFarmCard>
-  </Layout>
-))`
-  .StateFarmCard {
-    padding: 16px;
+  </section>
+})`
+h1 {
+  margin-bottom: 18px;
+}
+  input[type=checkbox] {
+    ${checkboxStyles}
   }
-  .Medal{
-    width: 150px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
+  .checkbox-section {
+    display: flex;
+    flex-direction: column;
+    > div {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      :last-child {
+        margin-bottom: 0;
+      }
+      > label {
+        margin-top: 5px;
+        max-width: 85%;
+      }
+    }
   }
-  .Star{
-    width: 50%;
-  }
-  h1{
-    
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 24px;
-    line-height: 28px;
-    text-align: center;
-    
-    color: #FFFFFF;
-  }
-  h4{
-
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 16px;
-    text-align: center;
-    color: #FFFFFF;
-
-  }
-  .column {
-
-    float: left;
-    width: 20%;
-    padding: 0px;
-  }
-  .row::after {
-    content: "";
-    clear: both;
-    display: table;
-  }  
-  /* put your styles here, it is similar to CSS */
 `
 
-export default Review
+const Notes = styled(({ className = '' }) => {
+  return (
+    <section className={'Notes '+className}>
+      <p>Notes:</p>
+      <textarea>
+
+      </textarea>
+    </section>
+  )
+})`
+  background-color: white !important;
+  color: black;
+  textarea {
+    width: 100%;
+    box-sizing: border-box;
+    height: 220px; 
+    resize: vertical;
+    border: 1px solid #E0E0E0;
+    padding: 11px;
+    border-radius: 5px;
+  }
+`
+
+const ReviewPage = styled(({ className = '' }) => {
+  const liveCustomerDetails = useSelector(selectLiveCustomer);
+  return (
+    <Layout className={className} title={'Generations United - Call'} bottomBar={false}>
+      <StateFarmCard className="StateFarmCard" >
+        <div className="cards">
+          <CustomerCard className="LiveCallCustomerCard" selected={true} carousel={false} details={liveCustomerDetails} time="15:39"/>
+          <CheckboxSection className="LiveCallConcerns" title="Concerns" items={[
+            { text: 'Mental Health', checked: false },
+            { text: 'Physical Health', checked: false }
+          ]} />
+          <Notes className="ReviewNotes" />
+        </div>
+      </StateFarmCard>
+    </Layout>
+  )
+})`
+.call-time {
+  color: ${({ theme: { colors }}) => colors.button.primary}
+}
+.StateFarmCard {
+  padding: 16px;
+  min-height: 100vh;
+}
+h1 {
+  font-weight: 600;
+  font-size: 20px;
+}
+.cards {
+  > div, > section {
+    margin-bottom: 16px;
+  }
+  > section {
+    padding: 20px;
+  }
+}
+.LiveCallCustomerCard {
+  box-sizing: border-box;
+  max-width: 100%;
+  width: 100%;
+  position: initial;
+  border: none;
+}
+`
+
+export default withRedux(ReviewPage)
