@@ -7,7 +7,7 @@ import Img from '../components/Img'
 
 const StateFarmAppImage0 = '/images/StateFarmApp-0.png'
 const StateFarmAppImage1 = '/images/StateFarmApp-1.png'
-const TechSupportImage = '/images/elderly-tech-support.jpeg'
+const TechSupportImage = '/images/young-elderly.png'
 
 const GreenAmbassadorCard = () => {
   return (
@@ -15,8 +15,10 @@ const GreenAmbassadorCard = () => {
       <section>
         <div className="subsection" >
           <Img src={TechSupportImage} alt="tech support for the elderly" className="tech-support-image"/>
-          <h3>Green Youth Ambassador</h3>
-          <p>Want to lower your insurance by sharing your tech knowledge?</p>
+          <h3>Generations United</h3>
+          <p>Join the StateFarm Generations United Initiative!</p>
+          <p>Check-in with elderly members on the phone through our Generations United portal. 
+            As a special thank you, receive a discount on your initiative for doing so.</p>
         </div>
         <HorizontalLine className="horizontal-line"/>
         <div className="subsection centered">
