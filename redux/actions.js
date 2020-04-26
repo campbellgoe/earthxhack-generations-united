@@ -43,3 +43,7 @@ export const setLanguages = languagesCheckboxes => ({ type: SET_LANGUAGES, langu
 export const ROTATE_CUSTOMERS = "ROTATE_CUSTOMERS";
 
 export const rotateCustomers = rotateDirection => ({ type: ROTATE_CUSTOMERS, rotateDirection });
+
+export const REVIEW_CUSTOMER = "REVIEW_CUSTOMER";
+
+export const REVIEW_CUSTOMER = review => ({ type: REVIEW_CUSTOMER, review });
