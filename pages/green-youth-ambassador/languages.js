@@ -1,10 +1,8 @@
-import { useState } from 'react'
 import styled from 'styled-components'
 import Layout from '../../components/Layout'
 import { BlockButton } from '../../components/Button'
 import StateFarmCard from '../../components/StateFarmCard'
-
-const TickImage = '/images/tick.svg'
+import Checkboxes, { checkboxStyles } from '../../components/Checkboxes'
 
 const languagesCheckboxes = [
   {
@@ -37,38 +35,18 @@ const languagesCheckboxes = [
   {
     text: 'Pilipino'
   }
-]
+].map(props=>({checked: false, ...props}))
 
-const Column = styled.div`
-`;
-
-const Checkboxes = ({ className = '', items }) => {
-  const [checkboxes, setCheckboxes] = useState(items);
-  const handleCheckboxChange = (index, evt) => {
-    const checked = evt.target.checked;
-    const newCheckboxes = [...checkboxes];
-    newCheckboxes[index].checked = checked;
-    setCheckboxes(newCheckboxes);
-  }
-  return <div className={className}>
-    {checkboxes.map(({ text, checked }, index) => {
-      return (<div key={text + index} className="checkbox-row">
-        <input id={text + index} type="checkbox" checked={checked} onChange={e => handleCheckboxChange(index, e)} />
-        <label htmlFor={text + index}>{text.toUpperCase()}</label>
-      </div>)
-    })
-    }</div>
-}
 const LanguagesCheckboxes = styled(({ className = '', items }) => {
   const col0 = items.slice(0, items.length / 2);
   const col1 = items.slice(items.length / 2);
   return (<div className={className + ' checkboxes-container'}>
-    <Column>
+    <div>
       <Checkboxes items={col0} />
-    </Column>
-    <Column>
+    </div>
+    <div>
       <Checkboxes items={col1} />
-    </Column>
+    </div>
   </div>)
 })`
   display: flex;
@@ -79,16 +57,7 @@ const LanguagesCheckboxes = styled(({ className = '', items }) => {
       margin-left: 10px;
     }
     input {
-      width: 24px;
-      height: 24px;
-      border-radius: 5px;
-      background-color: white;
-      appearance: none;
-      :checked {
-        background-image: url(${TickImage});
-        background-position: center;
-        background-repeat: no-repeat;
-      }
+      ${checkboxStyles}
     }
     input, label {
       vertical-align: middle;
