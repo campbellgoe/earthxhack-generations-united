@@ -19,3 +19,7 @@ export const select3MiddleCustomers = state => {
   const { details, middleCardIndex } = state.customer;
   return getMiddle3(details, middleCardIndex);
 }
+export const selectLiveCustomer = state => {
+  const { details, middleCardIndex } = state.customer;
+  return details[middleCardIndex];
+}
