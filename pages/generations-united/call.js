@@ -144,7 +144,7 @@ const CallPage = styled(({ className = '' }) => {
         <CustomerCarousel customers={customers} className="CallPageCustomerCarousel" />
         <div className="phone-icons-container">
           <div className="phone-icons">
-            <Link href="/generations-united/call-live"><button className="start-call"/></Link>
+            <Link href="/generations-united/live-call"><button className="start-call"/></Link>
             <button className="end-call"/>
           </div>
         </div>
