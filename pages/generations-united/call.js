@@ -7,6 +7,10 @@ import StateFarmCard from '../../components/StateFarmCard'
 import { useSwipeable/*, Swipeable*/ } from 'react-swipeable'
 import { rotateCustomers } from '../../redux/actions'
 import Chevron from '../../components/Chevron'
+import Link from 'next/link'
+
+const PhoneOpenImage = '/images/phone-open.png'
+const PhoneCloseImage = '/images/phone-close.png'
 
 const CustomerCard = styled(({ className = '', details: { name, age, gender, location, languages }, selected = false }) => {
   return (
@@ -138,12 +142,48 @@ const CallPage = styled(({ className = '' }) => {
         <p>Thanks for signing up. Start helping people and start earning credits.</p>
         <p>Here are some members you can check up on.</p>
         <CustomerCarousel customers={customers} className="CallPageCustomerCarousel" />
+        <div className="phone-icons-container">
+          <div className="phone-icons">
+            <Link href="/generations-united/call-live"><button className="start-call"/></Link>
+            <button className="end-call"/>
+          </div>
+        </div>
       </StateFarmCard>
     </Layout>
   )
 })`
   .StateFarmCard {
     padding: 16px;
+    height: 100vh;
+  }
+  .CallPageCustomerCarousel {
+    margin-top: 48px;
+  }
+  .phone-icons-container {
+    width: calc(100% - 32px);
+    position: absolute;
+    bottom: 16px;
+  }
+  .phone-icons {
+    display: flex;
+    justify-content: space-between;
+    margin: 32px;
+    button {
+      appearance: none;
+      background-color: white;
+      border: none;
+      width: 50px;
+      height: 50px;
+      background-position: center;
+      background-repeat: no-repeat;
+      border-radius: 25px;
+    }
+    .start-call {
+      background-image: url(${PhoneOpenImage});
+    }
+    .end-call {
+      background-image: url(${PhoneCloseImage});
+    }
   }
 `
 
