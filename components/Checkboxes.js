@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const TickImage = '/images/tick.svg'
 export const checkboxStyles = `
@@ -13,7 +13,7 @@ export const checkboxStyles = `
     background-repeat: no-repeat;
   }
 `;
-const Checkboxes = ({ className = '', items, labelled = true }) => {
+const Checkboxes = ({ className = '', items, labelled = true, onChange = Function.prototype }) => {
   const [checkboxes, setCheckboxes] = useState(items);
   const handleCheckboxChange = (index, evt) => {
     const checked = evt.target.checked;
@@ -21,6 +21,9 @@ const Checkboxes = ({ className = '', items, labelled = true }) => {
     newCheckboxes[index].checked = checked;
     setCheckboxes(newCheckboxes);
   }
+  useEffect(()=>{
+    onChange(checkboxes);
+  }, [checkboxes]);
   return <div className={className}>
     {checkboxes.map(({ text, checked }, index) => {
       return (<div key={text + index} className="checkbox-row">
