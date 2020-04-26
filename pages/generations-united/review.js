@@ -7,7 +7,7 @@ import Link from 'next/link'
 import CustomerCard from '../../components/CustomerCard'
 import { checkboxStyles } from '../../components/Checkboxes'
 import styled from 'styled-components'
-
+import { BlockButton } from '../../components/Button'
 
 const CheckboxSection = styled(({ className = '', title, items = [] }) => {
   return <section className={className + ' CheckboxSection'}>
@@ -84,11 +84,17 @@ const ReviewPage = styled(({ className = '' }) => {
             { text: 'Physical Health', checked: false }
           ]} />
           <Notes className="ReviewNotes" />
+          <Link href="/generations-united/thanks"><BlockButton className="submit-button">SUBMIT</BlockButton></Link>
         </div>
       </StateFarmCard>
     </Layout>
   )
 })`
+.submit-button {
+  width: 100%;
+  position: relative;
+  margin: 0;
+}
 .call-time {
   color: ${({ theme: { colors }}) => colors.button.primary}
 }
