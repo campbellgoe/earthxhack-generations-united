@@ -37,3 +37,9 @@ export const setProjects = projects => ({ type: SET_PROJECTS, projects });
 export const SET_LANGUAGES = "SET_LANGUAGES";
 
 export const setLanguages = languagesCheckboxes => ({ type: SET_LANGUAGES, languagesCheckboxes });
+
+// customer
+
+export const ROTATE_CUSTOMERS = "ROTATE_CUSTOMERS";
+
+export const rotateCustomers = rotateDirection => ({ type: ROTATE_CUSTOMERS, rotateDirection });
