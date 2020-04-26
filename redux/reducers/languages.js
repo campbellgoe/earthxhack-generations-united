@@ -1,5 +1,3 @@
-//s3 reducer
-
 import { SET_LANGUAGES } from "../actions.js";
 const initialState = {
   checkboxes: [

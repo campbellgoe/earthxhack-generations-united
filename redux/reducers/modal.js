@@ -1,5 +1,3 @@
-//s3 reducer
-
 import { SET_MODAL } from "../actions.js";
 const initialState = {
   kind: '',
