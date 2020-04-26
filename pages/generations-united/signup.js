@@ -22,7 +22,7 @@ const SignUpPage = styled(({ className = '' }) => {
         Drive Safe & Save program whilst earning insurance credits, a win-win situation.</p>
       <div className="buttons-container">
         <TextButton>LEARN MORE</TextButton>
-        <Link href="/green-youth-ambassador/languages">
+        <Link href="/generations-united/languages">
           <BlockButton>JOIN NOW</BlockButton>
         </Link>
       </div>

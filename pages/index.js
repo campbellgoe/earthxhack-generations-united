@@ -20,7 +20,7 @@ const GreenAmbassadorCard = () => {
         </div>
         <HorizontalLine className="horizontal-line"/>
         <div className="subsection centered">
-          <Link href='/green-youth-ambassador/signup'>
+          <Link href='/generations-united/signup'>
             <TextButton
               className="join-button"
             >Join</TextButton>
