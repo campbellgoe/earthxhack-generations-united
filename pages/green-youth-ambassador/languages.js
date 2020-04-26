@@ -66,7 +66,7 @@ const LanguagesCheckboxes = styled(({ className = '', items }) => {
 `
 
 export default styled(({ className = '' }) => (
-  <Layout className={className} title={'Green Youth Ambassador - Languages'}>
+  <Layout className={className} title={'Green Youth Ambassador - Languages'} bottomBar={false}>
     <StateFarmCard className="StateFarmCard">
       <h1>Which languages are you fluent in?</h1>
       <h2>Choose all that apply.</h2>

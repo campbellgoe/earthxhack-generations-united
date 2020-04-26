@@ -3,7 +3,7 @@ import Head from 'next/head'
 import StateFarmTopBar from './StateFarmTopBar'
 import StateFarmBottomBar from './StateFarmBottomBar'
 
-export default styled(({ className = '', children, title }) => (
+export default styled(({ className = '', children, title, bottomBar = true }) => (
   <>
     <Head>
       <title>{title}</title>
@@ -11,7 +11,7 @@ export default styled(({ className = '', children, title }) => (
     <div className={className + " SignUpPage"}>
       <StateFarmTopBar />
       {children}
-      <StateFarmBottomBar />
+      {bottomBar && <StateFarmBottomBar />}
     </div>
   </>)
 )`
