@@ -6,10 +6,11 @@ import Layout from '../../components/Layout'
 import StateFarmCard from '../../components/StateFarmCard'
 import { useSwipeable/*, Swipeable*/ } from 'react-swipeable'
 import { rotateCustomers } from '../../redux/actions'
+import Chevron from '../../components/Chevron'
 
 const CustomerCard = styled(({ className = '', details: { name, age, gender, location, languages }, selected = false }) => {
   return (
-    <div className={'CustomerCard '+className}>
+    <div className={'CustomerCard ' + className}>
       <h1>{name}</h1>
       <section>
         <div>
@@ -26,9 +27,9 @@ const CustomerCard = styled(({ className = '', details: { name, age, gender, loc
         </div>
       </section>
     </div>
-    )
+  )
 })`
-  background-color: ${({theme: { colors: { background }}}) => background.secondary};
+  background-color: ${({ theme: { colors: { background } } }) => background.secondary};
   border-radius: 5px;
   position: absolute;
   padding: 20px;
@@ -60,6 +61,7 @@ const CustomerCard = styled(({ className = '', details: { name, age, gender, loc
       border-bottom: 1px solid white;
     }
     z-index: 500;
+    box-shadow: 0 0 9px white;
   ` : `
     border: 1px solid #878787;
     color: #878787;
@@ -77,29 +79,52 @@ const CustomerCarousel = styled(({ className = '', customers = [] }) => {
   const swipeConfig = {
     delta: 10,
   }
+  //left and right are flipped when swiping versus clicking left/right buttons, so -1 and +1 can be confusing
+  const handleSwipeLeft = () => {
+    dispatch(rotateCustomers(1));
+  }
+  const handleSwipeRight = () => {
+    dispatch(rotateCustomers(-1));
+  }
   const swipeHandlers = useSwipeable({
-    onSwipedLeft: () => {
-      dispatch(rotateCustomers(-1));
-    },
-    onSwipedRight: () => {
-      dispatch(rotateCustomers(1));
-    }, ...swipeConfig })
+    onSwipedLeft: handleSwipeLeft,
+    onSwipedRight: handleSwipeRight,
+    ...swipeConfig
+  })
   return (
-    <div className={"CustomerCarousel "+className} {...swipeHandlers}>
-      {customers.map((details, index) => {
-        return <CustomerCard key={details.name+index} details={details} className="CustomerCarouselCard" selected={index === 1}/>
-      })}
+    <div className={"CustomerCarousel " + className}>
+      <div className="carousel-cards" {...swipeHandlers}>
+        {customers.map((details, index) => {
+          return <CustomerCard key={details.name + index} details={details} className="CustomerCarouselCard" selected={index === 1} />
+        })}
+      </div>
+      <div className="chevron-buttons">
+        <button onClick={handleSwipeRight}><Chevron left={true} /></button>
+        <button onClick={handleSwipeLeft}><Chevron /></button>
+      </div>
     </div>
   );
 })`
-display: flex;
-justify-content: center;
-.CustomerCarouselCard {
-  :first-child {
-    left: 0;
+.carousel-cards {
+  height: 185px;
+  display: flex;
+  justify-content: center;
+  .CustomerCarouselCard {
+    :first-child {
+      left: 0;
+    }
+    :last-child {
+      right: 0;
+    }
   }
-  :last-child {
-    right: 0;
+}
+.chevron-buttons {
+  display: flex;
+  justify-content: center;
+  button {
+    appearance: none;
+    background-color: transparent;
+    border: none;
   }
 }
 `
@@ -112,7 +137,7 @@ const CallPage = styled(({ className = '' }) => {
         <p>{`Hi <username>!`}</p>
         <p>Thanks for signing up. Start helping people and start earning credits.</p>
         <p>Here are some members you can check up on.</p>
-        <CustomerCarousel customers={customers} className="CallPageCustomerCarousel"/>
+        <CustomerCarousel customers={customers} className="CallPageCustomerCarousel" />
       </StateFarmCard>
     </Layout>
   )

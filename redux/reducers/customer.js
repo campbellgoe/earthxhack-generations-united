@@ -11,7 +11,7 @@ const initialState = {
       age: 65,
       gender: 'Female',
       location: 'Seattle, WA',
-      languages: ['English', '中文（普通话）']
+      languages: ['English']
     },
     {
       id: '6c520bb5-55e5-4040-8bc0-1f250d0f028e',
