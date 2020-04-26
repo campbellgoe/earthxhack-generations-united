@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-const CustomerCard = styled(({ className = '', details: { name, age, gender, location, languages }}) => {
+const CustomerCard = styled(({ className = '', details: { name, age, gender, location, languages }, time = ''}) => {
   return (
     <div className={'CustomerCard ' + className}>
-      <h1>{name}</h1>
+      <h1><span>{name}</span>{time && <span>{time}</span>}</h1>
       <section>
         <div>
           <div>Age</div>
@@ -32,6 +32,8 @@ const CustomerCard = styled(({ className = '', details: { name, age, gender, loc
     font-weight: 600;
     font-size: 20px;
     padding-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
   }
   section {
     padding-top: 16px;
