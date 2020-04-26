@@ -91,7 +91,7 @@ const CallPage = styled(({ className = '' }) => {
 })`
   .StateFarmCard {
     padding: 16px;
-    height: 100vh;
+    min-height: 100vh;
   }
   .CallPageCustomerCarousel {
     margin-top: 48px;

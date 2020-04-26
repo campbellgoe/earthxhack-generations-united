@@ -8,8 +8,6 @@ import Link from 'next/link'
 import CustomerCard from '../../components/CustomerCard'
 import { checkboxStyles } from '../../components/Checkboxes'
 
-const PhoneOpenImage = '/images/phone-open.png'
-const PhoneCloseImage = '/images/phone-close.png'
 
 const CheckboxSection = styled(({ className = '', title, items = [] }) => {
   return <section className={className + ' CheckboxSection'}>
@@ -51,31 +49,49 @@ h1 {
   }
 `
 
-const LiveCallPage = styled(({ className = '' }) => {
+const Notes = styled(({ className = '' }) => {
+  return (
+    <section className={'Notes '+className}>
+      <p>Notes:</p>
+      <textarea>
+
+      </textarea>
+    </section>
+  )
+})`
+  background-color: white !important;
+  color: black;
+  textarea {
+    width: 100%;
+    box-sizing: border-box;
+    height: 220px; 
+    resize: vertical;
+    border: 1px solid #E0E0E0;
+    padding: 11px;
+    border-radius: 5px;
+  }
+`
+
+const ReviewPage = styled(({ className = '' }) => {
   const liveCustomerDetails = useSelector(selectLiveCustomer);
   return (
     <Layout className={className} title={'Generations United - Call'} bottomBar={false}>
       <StateFarmCard className="StateFarmCard" >
         <div className="cards">
-          <CustomerCard className="LiveCallCustomerCard" selected={true} carousel={false} details={liveCustomerDetails} time="07:39" />
+          <CustomerCard className="LiveCallCustomerCard" selected={true} carousel={false} details={liveCustomerDetails} time="15:39"/>
           <CheckboxSection className="LiveCallConcerns" title="Concerns" items={[
             { text: 'Mental Health', checked: false },
             { text: 'Physical Health', checked: false }
           ]} />
-          <CheckboxSection className="LiveCallOptOut" title="Opt Out" items={[
-            { text: 'This person requested not to be contacted again for this program.', checked: false },
-          ]} />
-        </div>
-        <div className="phone-icons-container">
-          <div className="phone-icons">
-            <button className="start-call" />
-            <Link href="/generations-united/review"><button className="end-call" /></Link>
-          </div>
+          <Notes className="ReviewNotes" />
         </div>
       </StateFarmCard>
     </Layout>
   )
 })`
+.call-time {
+  color: ${({ theme: { colors }}) => colors.button.primary}
+}
 .StateFarmCard {
   padding: 16px;
   min-height: 100vh;
@@ -99,32 +115,6 @@ h1 {
   position: initial;
   border: none;
 }
-.phone-icons-container {
-  width: calc(100% - 32px);
-  position: absolute;
-  bottom: 16px;
-}
-.phone-icons {
-  display: flex;
-  justify-content: space-between;
-  margin: 32px;
-  button {
-    appearance: none;
-    background-color: white;
-    border: none;
-    width: 50px;
-    height: 50px;
-    background-position: center;
-    background-repeat: no-repeat;
-    border-radius: 25px;
-  }
-  .start-call {
-    background-image: url(${PhoneOpenImage});
-  }
-  .end-call {
-    background-image: url(${PhoneCloseImage});
-  }
-}
 `
 
-export default withRedux(LiveCallPage)
+export default withRedux(ReviewPage)
