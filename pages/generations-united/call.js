@@ -4,8 +4,10 @@ import { select3MiddleCustomers } from '../../redux/selectors'
 import { useDispatch, useSelector } from 'react-redux'
 import Layout from '../../components/Layout'
 import StateFarmCard from '../../components/StateFarmCard'
+import { useSwipeable/*, Swipeable*/ } from 'react-swipeable'
+import { rotateCustomers } from '../../redux/actions'
 
-const CustomerCard = styled(({ className = '', details: { name, age, gender, location, language }, selected = false }) => {
+const CustomerCard = styled(({ className = '', details: { name, age, gender, location, languages }, selected = false }) => {
   return (
     <div className={'CustomerCard '+className}>
       <h1>{name}</h1>
@@ -20,7 +22,7 @@ const CustomerCard = styled(({ className = '', details: { name, age, gender, loc
           <div>{age}</div>
           <div>{gender}</div>
           <div>{location}</div>
-          <div>{language}</div>
+          <div>{languages.join(', ')}</div>
         </div>
       </section>
     </div>
@@ -71,8 +73,19 @@ const CustomerCard = styled(({ className = '', details: { name, age, gender, loc
 `
 
 const CustomerCarousel = styled(({ className = '', customers = [] }) => {
+  const dispatch = useDispatch();
+  const swipeConfig = {
+    delta: 10,
+  }
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: () => {
+      dispatch(rotateCustomers(-1));
+    },
+    onSwipedRight: () => {
+      dispatch(rotateCustomers(1));
+    }, ...swipeConfig })
   return (
-    <div className={"CustomerCarousel "+className}>
+    <div className={"CustomerCarousel "+className} {...swipeHandlers}>
       {customers.map((details, index) => {
         return <CustomerCard key={details.name+index} details={details} className="CustomerCarouselCard" selected={index === 1}/>
       })}
@@ -99,7 +112,7 @@ const CallPage = styled(({ className = '' }) => {
         <p>{`Hi <username>!`}</p>
         <p>Thanks for signing up. Start helping people and start earning credits.</p>
         <p>Here are some members you can check up on.</p>
-        <CustomerCarousel customers={customers} className="CallPageCustomerCarousel" />
+        <CustomerCarousel customers={customers} className="CallPageCustomerCarousel"/>
       </StateFarmCard>
     </Layout>
   )

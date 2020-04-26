@@ -42,12 +42,20 @@ const initialState = {
   middleCardIndex: 0,
 };
 export default function(state = initialState, { type, rotateDirection }) {
+  let middleCardIndex = state.middleCardIndex;
+  if(rotateDirection === -1 && middleCardIndex === 0){
+    middleCardIndex = state.details.length-1;
+  } else if(rotateDirection === 1 && middleCardIndex === state.details.length-1){
+    middleCardIndex = 0;
+  } else {
+    middleCardIndex += rotateDirection;
+  }
   switch (type) {
     case ROTATE_CUSTOMERS: {
       // this is a carousel which can rotate left or right. +1 is right, -1 is left.
       return {
         ...state,
-        middleCardIndex: (state.middleCardIndex + rotateDirection) % state.details.length
+        middleCardIndex
       }
     }
     default: {
