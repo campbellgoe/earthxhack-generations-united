@@ -16,7 +16,7 @@ const Review = styled(({ className = '' }) => (
     <h4>You earned a badge.</h4>
     <br/>
     <br/>
-    <h4>How was your expirience?</h4>
+    <h4>How was your experience?</h4>
     <br/>
     <div class="row">
       <div class="column">
