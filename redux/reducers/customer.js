@@ -1,4 +1,4 @@
-import { ROTATE_CUSTOMERS } from "../actions.js";
+import { ROTATE_CUSTOMERS, REVIEW_CUSTOMER } from "../actions.js";
 const initialState = {
   details: [
     {
@@ -11,7 +11,11 @@ const initialState = {
       age: 65,
       gender: 'Female',
       location: 'Seattle, WA',
-      languages: ['English']
+      languages: ['English'],
+      review: {
+        concerns: [],
+        optOut: false,
+      },
     },
     {
       id: '6c520bb5-55e5-4040-8bc0-1f250d0f028e',
@@ -19,7 +23,11 @@ const initialState = {
       age: 70,
       gender: 'Male',
       location: 'Boston, MA',
-      languages: ['English']
+      languages: ['English'],
+      review: {
+        concerns: ['Physical Health'],
+        optOut: false,
+      },
     },
     {
       id: '58276083-0ac8-4d3f-954f-9bdd3b757730',
@@ -27,7 +35,11 @@ const initialState = {
       age: 68,
       gender: 'Male',
       location: 'Jacksonville, FL',
-      languages: ['English', 'Espanol']
+      languages: ['English', 'Espanol'],
+      review: {
+        concerns: ['Mental Health', 'Physical Health'],
+        optOut: false,
+      },
     },
     {
       id: '5ac95d13-1dbe-4f6a-8ce5-d5b8b38c645d',
@@ -35,13 +47,23 @@ const initialState = {
       age: 71,
       gender: 'Female',
       location: 'Sacramento, CA',
-      languages: ['English']
+      languages: ['English'],
+      review: {
+        concerns: ['Mental Health'],
+        optOut: false,
+      },
     }
   ],
   //use this with getMiddle3 to get the middle 3 cards from the details array
   middleCardIndex: 0,
+  callInProgress: false,
 };
-export default function(state = initialState, { type, rotateDirection }) {
+//change an item of the array and it returns a new array
+function setArrayItemImmutable(arr, index, cb){
+  return [...arr.slice(0,index), cb(arr[index]), ...arr.slice(index+1)];
+}
+export default function(state = initialState, { type, ...action }) {
+  const rotateDirection = action.rotateDirection;
   let middleCardIndex = state.middleCardIndex;
   if(rotateDirection === -1 && middleCardIndex === 0){
     middleCardIndex = state.details.length-1;
@@ -56,6 +78,20 @@ export default function(state = initialState, { type, rotateDirection }) {
       return {
         ...state,
         middleCardIndex
+      }
+    }
+    case REVIEW_CUSTOMER: {
+      const details = state.details;
+      const middleCardIndex = state.middleCardIndex;
+      const review = action.review;
+      return {
+        ...state,
+        details: setArrayItemImmutable(details, middleCardIndex, selectedDetails => {
+          return {
+            ...selectedDetails,
+            review
+          }
+        })
       }
     }
     default: {
